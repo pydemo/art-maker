@@ -1,0 +1,1 @@
+c:\tmp\Python\Python38-32\python.exe %*
