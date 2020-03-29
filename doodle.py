@@ -13,23 +13,23 @@ if 1:
 	colours = ['Black', 'Yellow', 'Red', 'Green', 'Blue', 'Purple', 
 		'Brown', 'Aquamarine', 'Forest Green', 'Light Blue', 'Goldenrod', 
 		'Cyan', 'Orange', 'Navy', 'Dark Grey', 'Light Grey']
-	colours = ['#e7ebee','#6c7197','#739211','#080300','#d92405','#3563eb','#eac124'] #BIRD
-	#colours = ['#60bdaf', '#a1d8b1', '#edfcc2', '#f88aaf', '#455655'] #Michael Cina
-	#colours = ['#d7dddb', '#4f8a83', '#e76278', '#fac699', '#712164'] #Baloons
-	colours = ['#585340', '#b7ae9d', '#fafffc', '#accecd', '#8a151b', '#bc6367'] #Ryde
-	colours = ['#51574a', '#447c69', '#74c493', '#8e8c6d', '#e4bf80', '#e9d78e', '#e2975d', '#f19670', '#e16552', '#c94a53', '#be5168', '#a34974',\
-'#993767', '#65387d', '#4e2472', '#9163b6', '#e279a3', '#e0598b', '#7c9fb0', '#5698c4', '#9abf88'] #trove
-	colours = ['#f7fcf0', '#e0f3db', '#ccebc5', '#a8ddb5', '#7bccc4', '#4eb3d3', '#2b8cbe', '#0868ac', '#084081'] #Toni
-	colours = ['#1a1334', '#26294a', '#01545a', '#017351', '#03c383', '#aad962', '#fbbf45', '#ef6a32', '#ed0345', '#a12a5e', '#710162', '#110141'] #Colores
-	colours = ['#fc6472', '#f4b2a6', '#eccdb3', '#bcefd0', '#a1e8e4', '#23c8b2', '#c3ecee'] #Pleasant
-	colours = ['#faa818', '#41a30d', '#ffce38', '#367d7d', '#d33502', '#6ebcbc', '#37526d'] #Van Gogh
-	colours = ['#c000a4', '#5c015e', '#5225d8', '#2a0161', '#0106d1', '#06004b'] #Royal
-	colours = ['#2060ff', '#209fff', '#20bfff', '#00cfff', '#2affff', '#55ffff', '#7fffff', '#aaffff', '#ffff54', '#fff000', '#ffbf00', '#ffa800',\
-'#ff8a00', '#ff7000', '#ff4d00', '#ff0000']
-	colours = ['#f4e1f0', '#f98a6b', '#d31b36', '#123e49', '#71999b', '#f9f7fc', '#fed760', '#fc648d', '#621a32', '#778cdf'] #drip
-	colours = ['#c89e12', '#fdc100', '#ff8c00', '#fc3c07', '#b81313', '#6b2e13', '#472c00'] #fruit
-	colours = ['#ea573d', '#fbc063', '#64b0bc', '#446699', '#555577'] #blue lagoon
-	colours = colours+['#551177', '#ddaaff', '#ffccff', '#eeddff', '#ff0077'] #purple sunset
+	colours =  ['#e7ebee','#6c7197','#739211','#080300','#d92405','#3563eb','#eac124'] #BIRD
+	#colours =  colours+['#60bdaf', '#a1d8b1', '#edfcc2', '#f88aaf', '#455655'] #Michael Cina
+	colours =  colours+['#d7dddb', '#4f8a83', '#e76278', '#fac699', '#712164'] #Baloons
+	colours = colours+ ['#585340', '#b7ae9d', '#fafffc', '#accecd', '#8a151b', '#bc6367'] #Ryde
+	#colours = colours+['#51574a', '#447c69', '#74c493', '#8e8c6d', '#e4bf80', '#e9d78e', '#e2975d', '#f19670', '#e16552', '#c94a53', '#be5168', '#a34974',\
+	#'#993767', '#65387d', '#4e2472', '#9163b6', '#e279a3', '#e0598b', '#7c9fb0', '#5698c4', '#9abf88'] #trove
+	colours = colours+['#f7fcf0', '#e0f3db', '#ccebc5', '#a8ddb5', '#7bccc4', '#4eb3d3', '#2b8cbe', '#0868ac', '#084081'] #Toni
+	colours = colours+['#1a1334', '#26294a', '#01545a', '#017351', '#03c383', '#aad962', '#fbbf45', '#ef6a32', '#ed0345', '#a12a5e', '#710162', '#110141'] #Colores
+	colours = colours+['#fc6472', '#f4b2a6', '#eccdb3', '#bcefd0', '#a1e8e4', '#23c8b2', '#c3ecee'] #Pleasant
+	colours = colours+['#faa818', '#41a30d', '#ffce38', '#367d7d', '#d33502', '#6ebcbc', '#37526d'] #Van Gogh
+	colours = colours+['#c000a4', '#5c015e', '#5225d8', '#2a0161', '#0106d1', '#06004b'] #Royal
+	colours = colours+['#2060ff', '#209fff', '#20bfff', '#00cfff', '#2affff', '#55ffff', '#7fffff', '#aaffff', '#ffff54', '#fff000', '#ffbf00', '#ffa800',\
+	'#ff8a00', '#ff7000', '#ff4d00', '#ff0000']
+	#colours = colours+['#f4e1f0', '#f98a6b', '#d31b36', '#123e49', '#71999b', '#f9f7fc', '#fed760', '#fc648d', '#621a32', '#778cdf'] #drip
+	#colours = colours+['#c89e12', '#fdc100', '#ff8c00', '#fc3c07', '#b81313', '#6b2e13', '#472c00'] #fruit
+	#colours = colours+['#ea573d', '#fbc063', '#64b0bc', '#446699', '#555577'] #blue lagoon
+	#colours = colours+['#551177', '#ddaaff', '#ffccff', '#eeddff', '#ff0077'] #purple sunset
 	#colours = colours+['#f6300a', '#d11b7e', '#f6ef2a', '#00c000', '#0a62da'] #installation
 	#colours = ['#7f0000', '#cc0000', '#ff4444', '#ff7f7f', '#ffb2b2', '#995100', '#cc6c00', '#ff8800', '#ffbb33', '#ffe564', '#2c4c00', '#436500'\
 	#'#669900', '#99cc00', '#d2fe4c', '#3c1451', '#6b238e', '#9933cc', '#aa66cc', '#bc93d1', '#004c66', '#007299', '#0099cc', '#33b5e5',
@@ -398,8 +398,8 @@ class DoodleWindow(wx.Window,DoodleMenus):
 		#wx.SOLID+wx.CAP_PROJECTING
 		cap = wx.CAP_BUTT
 		caps=[wx.CAP_ROUND , wx.CAP_PROJECTING] #, wx.CAP_BUTT]
-		caps=[wx.CAP_BUTT]
-		brush= wx.DOT
+		caps=[wx.CAP_ROUND]
+		brush= wx.DOT_DASH
 		for colour, thickness, lineSegments in lines:
 			pen = wx.Pen(wx.Colour(colour), thickness, brush)
 			if 0: #Fill-in
@@ -451,12 +451,17 @@ class DoodleWindow(wx.Window,DoodleMenus):
 					pen.SetCap(next(cap))
 					dc.SetPen(pen)				
 				dc.DrawLine(*[x+span*4 for x in line])
+				if 1:
+					pen = wx.Pen(wx.Colour(next(colr)), next(tk), brush) 
+					pen.SetCap(next(cap))
+					dc.SetPen(pen)				
+					dc.DrawLine(*[x+span*5 for x in line])				
 				
 		#dc.EndDrawing()
 thicknesses = [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128, 256, 512]
 thicknesses = [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128,  1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 1, 2, 3, 4, 6,8, 12, 16, 24, 32, 48, 64,  1, 2, 3, 4, 6,8, 12, 16, 24, 32, 48,]
 thicknesses = [  1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48,  1, 2, 3, 4, 6,8, 12, 16, 24, 32,   1, 2, 3, 4, 6,8, 12, 16, 24, 1, 2, 3, 4, 6,8, 12, 16, 24,  1, 2, 3, 4, 6,8, 12, 16 ]
-thicknesses = [ 16, 24, 32, 48, 60, 72, 90]
+thicknesses = [6,  12, 24,12, 24,12, 24,12, 24,12, 24,12, 24, 48, 60]
 def get_cap(caps):
 	prev=0
 	while True:
