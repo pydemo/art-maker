@@ -9,20 +9,7 @@ import wx
 from random import randrange
 from pprint import pprint as pp
 
-pen_styles = ["wx.SOLID", "wx.TRANSPARENT", "wx.DOT", "wx.LONG_DASH",
-			  "wx.SHORT_DASH", "wx.DOT_DASH", "wx.BDIAGONAL_HATCH",
-			  "wx.CROSSDIAG_HATCH", "wx.FDIAGONAL_HATCH", "wx.CROSS_HATCH",
-			  "wx.HORIZONTAL_HATCH", "wx.VERTICAL_HATCH", "wx.USER_DASH"]
-if 'wxMSW' in wx.PlatformInfo:
-	pen_styles.append("wx.STIPPLE")
-
-brush_styles = ["wx.SOLID", "wx.TRANSPARENT", "wx.STIPPLE", "wx.BDIAGONAL_HATCH",
-				"wx.CROSSDIAG_HATCH", "wx.FDIAGONAL_HATCH", "wx.CROSS_HATCH",
-				"wx.HORIZONTAL_HATCH", "wx.VERTICAL_HATCH"]
-
-			  
-class DoodleMenus(object):
-
+if 1:
 	colours = ['Black', 'Yellow', 'Red', 'Green', 'Blue', 'Purple', 
 		'Brown', 'Aquamarine', 'Forest Green', 'Light Blue', 'Goldenrod', 
 		'Cyan', 'Orange', 'Navy', 'Dark Grey', 'Light Grey']
@@ -42,25 +29,25 @@ class DoodleMenus(object):
 	colours = ['#f4e1f0', '#f98a6b', '#d31b36', '#123e49', '#71999b', '#f9f7fc', '#fed760', '#fc648d', '#621a32', '#778cdf'] #drip
 	colours = ['#c89e12', '#fdc100', '#ff8c00', '#fc3c07', '#b81313', '#6b2e13', '#472c00'] #fruit
 	colours = ['#ea573d', '#fbc063', '#64b0bc', '#446699', '#555577'] #blue lagoon
-	colours = ['#551177', '#ddaaff', '#ffccff', '#eeddff', '#ff0077'] #purple sunset
-	colours = ['#f6300a', '#d11b7e', '#f6ef2a', '#00c000', '#0a62da'] #installation
-	colours = ['#7f0000', '#cc0000', '#ff4444', '#ff7f7f', '#ffb2b2', '#995100', '#cc6c00', '#ff8800', '#ffbb33', '#ffe564', '#2c4c00', '#436500'\
-'#669900', '#99cc00', '#d2fe4c', '#3c1451', '#6b238e', '#9933cc', '#aa66cc', '#bc93d1', '#004c66', '#007299', '#0099cc', '#33b5e5',
-'#8ed5f0', '#660033', '#b20058', '#e50072', '#ff3298', '#ff7fbf'] #Android
-	colours = ['#93b4c7', '#acf0b0', '#a499ca', '#f0fabc', '#bff7f4'] #kick and boo/ pastel
-	colours = ['#2962ae', '#d81835', '#fb2d18', '#ff41a8', '#6cf4ba'] #india
-	colours = ['#ec2b22', '#f05320', '#f68e1d', '#2284ed', '#001e2d'] #orange and blue
-	colours = ['#3e6db6', '#ee1133', '#3ec0aa', '#ffc600', '#222299'] #cores
-	colours = ['#f15450', '#a98606', '#644379', '#8a3764', '#c97863', '#7ec1d4', '#fbb014'] #Buddist energy
-	#colours = ['#a200ff', '#e705ff', '#ffc600', '#ddff00', '#00ffa2', '#00ddff'] #sd mp1
-	#colours = ['#00aaee', '#ff5500', '#910091', '#ff0099', '#ff8a00', '#88cc00', '#0077bb'] #blend insider
-	#colours = ['#3a3a3a', '#808080', '#a8a8a8', '#d0d0d0', '#eeeeee', '#005f87', '#00afff', '#5fdf5f', '#87afdf', '#afafdf', '#afdf87', '#df8787','#dfaf87', '#dfafdf', '#ffffaf'] #x
-	#colours = ['#ec3c8e', '#63bb1e', '#fded00', '#651daf'] #marijuana
-	#colours = ['#ff0000', '#007c78', '#c4ff00', '#56061a', '#d646c6', '#ff3a9c', '#ffee68', '#ed2b00', '#ff4c4f', '#2cd7ff'] #underwater
-	colours = ['#faca07', '#06274c', '#0a529e', '#d3d0cb', '#274156']
-	colours = ['#6699cc', '#fff275', '#ff8c42', '#ff3c38', '#a23e48']
-	colours = colours+ ['#ffbe0b', '#fb5607', '#ff006e', '#8338ec', '#3a86ff'] #rainbow brights
-	colours = colours+['#0c120c', '#c20114', '#6d7275', '#c7d6d5', '#ecebf3'] # use me
+	colours = colours+['#551177', '#ddaaff', '#ffccff', '#eeddff', '#ff0077'] #purple sunset
+	#colours = colours+['#f6300a', '#d11b7e', '#f6ef2a', '#00c000', '#0a62da'] #installation
+	#colours = ['#7f0000', '#cc0000', '#ff4444', '#ff7f7f', '#ffb2b2', '#995100', '#cc6c00', '#ff8800', '#ffbb33', '#ffe564', '#2c4c00', '#436500'\
+	#'#669900', '#99cc00', '#d2fe4c', '#3c1451', '#6b238e', '#9933cc', '#aa66cc', '#bc93d1', '#004c66', '#007299', '#0099cc', '#33b5e5',
+	#'#8ed5f0', '#660033', '#b20058', '#e50072', '#ff3298', '#ff7fbf'] #Android
+	#colours = colours+['#93b4c7', '#acf0b0', '#a499ca', '#f0fabc', '#bff7f4'] #kick and boo/ pastel
+	# colours = colours+['#2962ae', '#d81835', '#fb2d18', '#ff41a8', '#6cf4ba'] #india
+	#colours = colours+['#ec2b22', '#f05320', '#f68e1d', '#2284ed', '#001e2d'] #orange and blue
+	#colours = colours+['#3e6db6', '#ee1133', '#3ec0aa', '#ffc600', '#222299'] #cores
+	#colours = colours+['#f15450', '#a98606', '#644379', '#8a3764', '#c97863', '#7ec1d4', '#fbb014'] #Buddist energy
+	#colours = colours+['#a200ff', '#e705ff', '#ffc600', '#ddff00', '#00ffa2', '#00ddff'] #sd mp1
+	#colours = colours+['#00aaee', '#ff5500', '#910091', '#ff0099', '#ff8a00', '#88cc00', '#0077bb'] #blend insider
+	#colours = colours+['#3a3a3a', '#808080', '#a8a8a8', '#d0d0d0', '#eeeeee', '#005f87', '#00afff', '#5fdf5f', '#87afdf', '#afafdf', '#afdf87', '#df8787','#dfaf87', '#dfafdf', '#ffffaf'] #x
+	#colours = colours+['#ec3c8e', '#63bb1e', '#fded00', '#651daf'] #marijuana
+	#colours = colours+['#ff0000', '#007c78', '#c4ff00', '#56061a', '#d646c6', '#ff3a9c', '#ffee68', '#ed2b00', '#ff4c4f', '#2cd7ff'] #underwater
+	#colours = colours+['#faca07', '#06274c', '#0a529e', '#d3d0cb', '#274156']
+	#colours = colours+ ['#6699cc', '#fff275', '#ff8c42', '#ff3c38', '#a23e48']
+	#colours = colours+ ['#ffbe0b', '#fb5607', '#ff006e', '#8338ec', '#3a86ff'] #rainbow brights good1
+	#colours = colours+['#0c120c', '#c20114', '#6d7275', '#c7d6d5', '#ecebf3'] # use me			good1
 	#colours = colours+['#02010a', '#04052e', '#140152', '#22007c', '#0d00a4'] #
 	#colours = colours+['#F0676E', '#5C51A6', '#3F61A6', '#54C3C2'] #Blue
 	#colours = colours+['#F27405', '#F24405', '#F20505', '#8C0303'] #Red
@@ -68,17 +55,15 @@ class DoodleMenus(object):
 	#colours = colours+['#D96A93', '#F5BD60', '#C2D2F2', '#F1B9CD']
 
 
+class DoodleMenus(object):
 
 
-
-
-	thicknesses = [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128, 256, 512]
-	thicknesses = [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128,  1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 1, 2, 3, 4, 6,8, 12, 16, 24, 32, 48, 64,  1, 2, 3, 4, 6,8, 12, 16, 24, 32, 48,]
-	thicknesses = [  1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 1, 2, 3, 4, 6,8, 12, 16, 24, 32, 48, 64,  1, 2, 3, 4, 6,8, 12, 16, 24, 32, 48, 1, 2, 3, 4, 6,8, 12, 16, 24, 32, 1, 2, 3, 4, 6,8, 12, 16, 24,]
-	
 	def __init__(self, parent):
+		self.colours=colours
+		self.thicknesses=thicknesses
 		self.makeMenu()
 		self.bindEvents()
+		
 	def makeMenu(self):
 		''' Make a menu that can be popped up later. '''
 		self.menu = wx.Menu()
@@ -250,7 +235,9 @@ def get_size(thicknesses):
 			#print(prev, next)
 			next = thicknesses[randrange(0, len(thicknesses))]
 		yield next
-		
+
+
+
 class DoodleWindow(wx.Window,DoodleMenus):
 
 
@@ -259,7 +246,7 @@ class DoodleWindow(wx.Window,DoodleMenus):
 			style=wx.NO_FULL_REPAINT_ON_RESIZE|wx.FULLSCREEN_NOSTATUSBAR)
 		DoodleMenus.__init__(self, parent)
 		self.initDrawing()
-
+		self.colours = colours
 		self.initBuffer()
 		#self.FullScreen()
 		#GetScreenSize
@@ -386,6 +373,17 @@ class DoodleWindow(wx.Window,DoodleMenus):
 		wx.HORIZONTAL_HATCH Short, horizontal hash lines.
 		wx.LONG_DASH Long dashes.
 		"""		
+		pen_styles = ["wx.SOLID", "wx.TRANSPARENT", "wx.DOT", "wx.LONG_DASH",
+					  "wx.SHORT_DASH", "wx.DOT_DASH", "wx.BDIAGONAL_HATCH",
+					  "wx.CROSSDIAG_HATCH", "wx.FDIAGONAL_HATCH", "wx.CROSS_HATCH",
+					  "wx.HORIZONTAL_HATCH", "wx.VERTICAL_HATCH", "wx.USER_DASH"]
+		if 'wxMSW' in wx.PlatformInfo:
+			pen_styles.append("wx.STIPPLE")
+
+		brush_styles = ["wx.SOLID", "wx.TRANSPARENT", "wx.STIPPLE", "wx.BDIAGONAL_HATCH",
+						"wx.CROSSDIAG_HATCH", "wx.FDIAGONAL_HATCH", "wx.CROSS_HATCH",
+						"wx.HORIZONTAL_HATCH", "wx.VERTICAL_HATCH"]
+		
 		#dc.BeginDrawing()
 		if 0:
 			ctx = wx.GraphicsContext.Create(dc)
@@ -396,26 +394,84 @@ class DoodleWindow(wx.Window,DoodleMenus):
 			import images2
 			#stippleBitmap = images2.Smiles.GetBitmap()
 			stippleBitmap = targetBitmap_point(wx.RED)
-			
+		
+		#wx.SOLID+wx.CAP_PROJECTING
+		cap = wx.CAP_BUTT
+		caps=[wx.CAP_ROUND , wx.CAP_PROJECTING] #, wx.CAP_BUTT]
+		caps=[wx.CAP_BUTT]
+		brush= wx.DOT
 		for colour, thickness, lineSegments in lines:
-			pen = wx.Pen(wx.Colour(colour), thickness, wx.DOT)
+			pen = wx.Pen(wx.Colour(colour), thickness, brush)
 			if 0: #Fill-in
 				pen.SetStipple(stippleBitmap)
 			#CAP_ROUND , CAP_PROJECTING and CAP_BUTT
-			if 0:
-				pen.SetCap(wx.CAP_PROJECTING)
+			if 1:
+				#print(next(capsp))
+				#pen.SetCap(caps[randrange(0, len(caps))])
+				pen.SetCap(next(get_cap(caps)))
 			#JOIN_BEVEL , JOIN_ROUND and JOIN_MITER 
 			if 0:
-				pen.SetJoin(wx.JOIN_BEVEL)
+				pen.SetJoin(wx.JOIN_MITER)
 			#pen.SetDashes([2, 5, 2, 2])
 			#bitmap.SetMask(wx.Mask(bitmap, wx.WHITE)) #  It will allow you to mark places that should be transparent
 			#dc.SetBrush(wx.Brush(wx.Colour(colours[randrange(0, len(colours))]), wx.TRANSPARENT))
+			
 			dc.SetPen(pen)
-			for lineSegment in lineSegments:
-				dc.DrawLine(*lineSegment)
+			if len(lineSegments)>1:
+				pass
+				if 0:
+					pp(lineSegments)
+					for lineSegment in lineSegments:
+						pp(lineSegment)
+						dc.DrawLine(*lineSegments[0])
+			elif len(lineSegments)>0:
+				line=lineSegments[0]
+				dc.DrawLine(*line)
+				span=25
+				tk= get_size(thicknesses) #[thickness]) #thicknesses)
+				colr = get_color(colours)
+				cap=get_cap(caps)
+				if 1:
+					pen = wx.Pen(wx.Colour(next(colr)), next(tk), brush) 
+					pen.SetCap(next(cap))
+					dc.SetPen(pen)
+				dc.DrawLine(*[x+span*1 for x in line])
+				if 1:
+					pen = wx.Pen(wx.Colour(next(colr)), next(tk), brush) 
+					pen.SetCap(next(cap))
+					dc.SetPen(pen)				
+				dc.DrawLine(*[x+span*2 for x in line])
+				if 1:
+					pen = wx.Pen(wx.Colour(next(colr)), next(tk),brush) 
+					pen.SetCap(next(cap))
+					dc.SetPen(pen)				
+				dc.DrawLine(*[x+span*3 for x in line])
+				if 1:
+					pen = wx.Pen(wx.Colour(next(colr)), next(tk), brush) 
+					pen.SetCap(next(cap))
+					dc.SetPen(pen)				
+				dc.DrawLine(*[x+span*4 for x in line])
+				
 		#dc.EndDrawing()
-
-
+thicknesses = [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128, 256, 512]
+thicknesses = [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128,  1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 1, 2, 3, 4, 6,8, 12, 16, 24, 32, 48, 64,  1, 2, 3, 4, 6,8, 12, 16, 24, 32, 48,]
+thicknesses = [  1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48,  1, 2, 3, 4, 6,8, 12, 16, 24, 32,   1, 2, 3, 4, 6,8, 12, 16, 24, 1, 2, 3, 4, 6,8, 12, 16, 24,  1, 2, 3, 4, 6,8, 12, 16 ]
+thicknesses = [ 16, 24, 32, 48, 60, 72, 90]
+def get_cap(caps):
+	prev=0
+	while True:
+		next = prev
+		while next == prev:
+			#print(prev, next)
+			next = caps[randrange(0, len(caps))]
+		yield next
+		
+step=10
+def get_span(step):
+	for i in range(100):
+		yield step*(i+1)
+		
+		
 class DoodleFrame(wx.Frame):
 	def __init__(self, parent=None):
 		super(DoodleFrame, self).__init__(parent, title="Doodle Frame", 
