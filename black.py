@@ -6,8 +6,10 @@ can do simple drawings upon.
 '''
 
 import wx
+import random
 from random import randrange
 from pprint import pprint as pp
+from include.DoodleMenus import DoodleMenus
 
 if 1:
 	colours = ['Black', 'Yellow', 'Red', 'Green', 'Blue', 'Purple', 
@@ -55,86 +57,7 @@ if 1:
 	#colours = colours+['#D96A93', '#F5BD60', '#C2D2F2', '#F1B9CD']
 
 
-class DoodleMenus(object):
 
-
-	def __init__(self, parent):
-		self.colours=colours
-		self.thicknesses=thicknesses
-		self.makeMenu()
-		self.bindEvents()
-		
-	def makeMenu(self):
-		''' Make a menu that can be popped up later. '''
-		self.menu = wx.Menu()
-		self.idToColourMap = self.addCheckableMenuItems(self.menu, 
-			self.colours)
-		self.bindMenuEvents(menuHandler=self.onMenuSetColour,
-			updateUIHandler=self.onCheckMenuColours,
-			ids=self.idToColourMap.keys())
-		self.menu.Break() # Next menu items go in a new column of the menu
-		if 1:
-			self.idToThicknessMap = self.addCheckableMenuItems(self.menu,
-				self.thicknesses, start=len(self.idToColourMap))
-			self.bindMenuEvents(menuHandler=self.onMenuSetThickness,
-				updateUIHandler=self.onCheckMenuThickness,
-				ids=self.idToThicknessMap.keys())
-
-	@staticmethod
-	def addCheckableMenuItems(menu, items, start=0):
-		''' Add a checkable menu entry to menu for each item in items. This
-			method returns a dictionary that maps the menuIds to the
-			items. '''
-		idToItemMapping = {}
-		for id, item in enumerate(items):
-			menuId = id +start
-			idToItemMapping[menuId] = item
-			menu.Append(menuId, str(item), kind=wx.ITEM_CHECK)
-		#pp(idToItemMapping)
-		return idToItemMapping
-
-	def bindMenuEvents(self, menuHandler, updateUIHandler, ids): 
-		''' Bind the menu id's in the list ids to menuHandler and
-			updateUIHandler. ''' 
-		sortedIds = sorted(ids)
-		firstId, lastId = sortedIds[0], sortedIds[-1]
-		for event, handler in \
-				[(wx.EVT_MENU_RANGE, menuHandler),
-				 (wx.EVT_UPDATE_UI_RANGE, updateUIHandler)]:
-			self.Bind(event, handler, id=firstId, id2=lastId)
-	def bindEvents(self):
-		for event, handler in [ \
-				(wx.EVT_LEFT_DOWN, self.onLeftDown), # Start drawing
-				(wx.EVT_LEFT_UP, self.onLeftUp),     # Stop drawing 
-				(wx.EVT_MOTION, self.onMotion),      # Draw
-				(wx.EVT_RIGHT_UP, self.onRightUp),   # Popup menu
-				(wx.EVT_SIZE, self.onSize),          # Prepare for redraw
-				(wx.EVT_IDLE, self.onIdle),          # Redraw
-				(wx.EVT_PAINT, self.onPaint),        # Refresh
-				(wx.EVT_WINDOW_DESTROY, self.cleanup)]:
-			self.Bind(event, handler)
-	# These two event handlers are called before the menu is displayed
-	# to determine which items should be checked.
-	def onCheckMenuColours(self, event):
-		colour = self.idToColourMap[event.GetId()]
-		event.Check(colour == self.currentColour)
-
-	def onCheckMenuThickness(self, event):
-		thickness = self.idToThicknessMap[event.GetId()]
-		event.Check(thickness == self.currentThickness)
-
-	# Event handlers for the popup menu, uses the event ID to determine
-	# the colour or the thickness to set.
-	def onMenuSetColour(self, event):
-		self.currentColour = self.idToColourMap[event.GetId()]
-
-	def onMenuSetThickness(self, event):
-		self.currentThickness = self.idToThicknessMap[event.GetId()]
-
-	def onRightUp(self, event):
-		''' Called when the right mouse button is released, will popup
-			the menu. '''
-		self.PopupMenu(self.menu)
 
 from itertools import cycle
 
@@ -237,11 +160,12 @@ def get_size(thicknesses):
 		yield next
 
 
-
+cs=(0,0)
 class DoodleWindow(wx.Window,DoodleMenus):
 
 
 	def __init__(self, parent):
+		global cs, rlines
 		super(DoodleWindow, self).__init__(parent, size=wx.GetDisplaySize(),
 			style=wx.NO_FULL_REPAINT_ON_RESIZE|wx.FULLSCREEN_NOSTATUSBAR)
 		DoodleMenus.__init__(self, parent)
@@ -253,6 +177,13 @@ class DoodleWindow(wx.Window,DoodleMenus):
 		#self.ShowFullScreen(not self.IsFullScreen())
 		#self.SetSize(wx.GetDisplaySize())
 		#self.Resize()
+		#cs = self.GetSize()
+		cs=wx.GetApp().GetTopWindow().GetSize()
+		side=500
+		w,h=cs
+		rlines = [\
+		[random.randint(int(w/2)-side, int(w/2)+side), random.randint(int(h/2)-side, int(h/2)+side) ] \
+		for j in range(2000)]
 
 	def initDrawing(self):
 		self.SetBackgroundColour('WHITE')
@@ -271,20 +202,7 @@ class DoodleWindow(wx.Window,DoodleMenus):
 		dc.SetBackground(wx.Brush(self.GetBackgroundColour()))
 		dc.Clear()
 		width, height = self.GetClientSize()
-		import images2 as images		
-		if 1: #set background
-			font = wx.SystemSettings.GetFont(wx.SYS_DEFAULT_GUI_FONT)
-			font.MakeSmaller()
-			dc.SetFont(font)
-			w, labelHeight = dc.GetTextExtent('Wy')
-			bmp = images.Smiles.GetBitmap()
-			bmp.SetMask(None)
-			brush = wx.Brush(bmp)
-			brush = wx.Brush(wx.BLACK, wx.SOLID)
-			#dc.DrawText('test', 1, 1)
 
-			dc.SetBrush(brush)
-			dc.DrawRectangle(5, labelHeight+2, width-10, height-labelHeight-5-2)
 			
 		self.drawLines(dc, *self.lines)
 		self.reInitBuffer = False
@@ -322,6 +240,7 @@ class DoodleWindow(wx.Window,DoodleMenus):
 			lineSegment = self.previousPosition + currentPosition
 			#print(lineSegment)
 			#pool
+			dc = wx.GCDC(dc)
 			self.drawLines(dc, (next(get_color(self.colours)), next(get_size(self.thicknesses)) , 
 				[lineSegment]))
 			self.currentLine.append(lineSegment)
@@ -358,21 +277,7 @@ class DoodleWindow(wx.Window,DoodleMenus):
 	# Other methods
 	@staticmethod
 	def drawLines(dc, *lines):
-		''' drawLines takes a device context (dc) and a list of lines
-		as arguments. Each line is a three-tuple: (colour, thickness,
-		linesegments). linesegments is a list of coordinates: (x1, y1,
-		x2, y2). '''
-		"""
-		Style Description
-		wx.BDIAGONAL_HATCH The pen will draw backward (northwest to southeast) hatch lines.
-		wx.CROSSDIAG_HATCH A combination of wx.bdiagonal_hatch and wx.fdiagonal_hatch— in other words, it creates x shapes.
-		wx.CROSS_HATCH Crosshatched + shapes.
-		wx.DOT Small dots.
-		wx.DOT_DASH Alternating between small dots and longer dashes.
-		wx.FDIAGONAL_HATCH The pen will draw forward (southwest to northeast) hatch lines.
-		wx.HORIZONTAL_HATCH Short, horizontal hash lines.
-		wx.LONG_DASH Long dashes.
-		"""		
+		global rlines
 		pen_styles = ["wx.SOLID", "wx.TRANSPARENT", "wx.DOT", "wx.LONG_DASH",
 					  "wx.SHORT_DASH", "wx.DOT_DASH", "wx.BDIAGONAL_HATCH",
 					  "wx.CROSSDIAG_HATCH", "wx.FDIAGONAL_HATCH", "wx.CROSS_HATCH",
@@ -384,83 +289,42 @@ class DoodleWindow(wx.Window,DoodleMenus):
 						"wx.CROSSDIAG_HATCH", "wx.FDIAGONAL_HATCH", "wx.CROSS_HATCH",
 						"wx.HORIZONTAL_HATCH", "wx.VERTICAL_HATCH"]
 		
-		#dc.BeginDrawing()
-		if 0:
-			ctx = wx.GraphicsContext.Create(dc)
-			pen = ctx.CreatePen(wx.GraphicsPenInfo(wx.BLUE).Width(1.25).Style(wx.PENSTYLE_DOT))
-			ctx.SetPen(pen)
-		#colours = ['#e7ebee','#6c7197','#739211','#080300','#d92405','#3563eb','#eac124']
-		if 0:
-			import images2
-			#stippleBitmap = images2.Smiles.GetBitmap()
-			stippleBitmap = targetBitmap_point(wx.RED)
+
 		
 		#wx.SOLID+wx.CAP_PROJECTING
 		cap = wx.CAP_BUTT
 		caps=[wx.CAP_ROUND , wx.CAP_PROJECTING] #, wx.CAP_BUTT]
 		caps=[wx.CAP_ROUND]
-		brush= wx.SHORT_DASH
+		brush= wx.SOLID
+		#pp(lines)
+		colr = get_color(colours)
 		for colour, thickness, lineSegments in lines:
-			pen = wx.Pen(wx.Colour(colour), thickness, brush)
-			if 0: #Fill-in
-				pen.SetStipple(stippleBitmap)
-			#CAP_ROUND , CAP_PROJECTING and CAP_BUTT
-			if 1:
-				#print(next(capsp))
-				#pen.SetCap(caps[randrange(0, len(caps))])
-				pen.SetCap(next(get_cap(caps)))
-			#JOIN_BEVEL , JOIN_ROUND and JOIN_MITER 
-			if 1:
-				pen.SetJoin(wx.JOIN_BEVEL)
-			#pen.SetDashes([2, 5, 2, 2])
-			#bitmap.SetMask(wx.Mask(bitmap, wx.WHITE)) #  It will allow you to mark places that should be transparent
-			#dc.SetBrush(wx.Brush(wx.Colour(colours[randrange(0, len(colours))]), wx.TRANSPARENT))
-			
+			c=next(colr)
+			pen = wx.Pen(wx.Colour(c), 1, brush)
+
 			dc.SetPen(pen)
 			if len(lineSegments)>1:
 				pass
-				if 0:
-					pp(lineSegments)
-					for lineSegment in lineSegments:
-						pp(lineSegment)
-						dc.DrawLine(*lineSegments[0])
 			elif len(lineSegments)>0:
 				line=lineSegments[0]
-				dc.DrawLine(*line)
-				span=25
-				tk= get_size(thicknesses) #[thickness]) #thicknesses)
-				colr = get_color(colours)
-				cap=get_cap(caps)
-				if 1:
-					pen = wx.Pen(wx.Colour(next(colr)), next(tk), brush) 
-					pen.SetCap(next(cap))
-					dc.SetPen(pen)
-				dc.DrawLine(*[x+span*1 for x in line])
-				if 1:
-					pen = wx.Pen(wx.Colour(next(colr)), next(tk), brush) 
-					pen.SetCap(next(cap))
-					dc.SetPen(pen)				
-				dc.DrawLine(*[x+span*2 for x in line])
-				if 1:
-					pen = wx.Pen(wx.Colour(next(colr)), next(tk),brush) 
-					pen.SetCap(next(cap))
-					dc.SetPen(pen)				
-				dc.DrawLine(*[x+span*3 for x in line])
-				if 1:
-					pen = wx.Pen(wx.Colour(next(colr)), next(tk), brush) 
-					pen.SetCap(next(cap))
-					dc.SetPen(pen)				
-				dc.DrawLine(*[x+span*4 for x in line])
-				if 1:
-					pen = wx.Pen(wx.Colour(next(colr)), next(tk), brush) 
-					pen.SetCap(next(cap))
-					dc.SetPen(pen)				
-					dc.DrawLine(*[x+span*5 for x in line])				
 				
+				#dc.DrawLine(*line)
+				x,y, *_ = line
+				#print(x,y, cs)
+				#print(x,y, cs)
+				w, h =cs
+				top= (x,y, x, 0)
+				side=200
+				if 0:
+					rlines2 = [\
+						[x,y]+[random.randint(int(w/2)-side, int(w/2)+side), random.randint(int(h/2)-side, int(h/2)+side) ] \
+				for j in range(2000)]
+				for rline in rlines:
+					line= [x,y]+rline
+					#pp(line)
+					dc.DrawLine(*line)
+
 		#dc.EndDrawing()
-thicknesses = [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128, 256, 512]
-thicknesses = [1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 128,  1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48, 64, 96, 1, 2, 3, 4, 6,8, 12, 16, 24, 32, 48, 64,  1, 2, 3, 4, 6,8, 12, 16, 24, 32, 48,]
-thicknesses = [  1, 2, 3, 4, 6, 8, 12, 16, 24, 32, 48,  1, 2, 3, 4, 6,8, 12, 16, 24, 32,   1, 2, 3, 4, 6,8, 12, 16, 24, 1, 2, 3, 4, 6,8, 12, 16, 24,  1, 2, 3, 4, 6,8, 12, 16 ]
 thicknesses = [6,  12, 24,12, 24,12, 24,12, 24,12, 24,12, 24, 48, 60]
 def get_cap(caps):
 	prev=0
@@ -480,7 +344,7 @@ def get_span(step):
 class DoodleFrame(wx.Frame):
 	def __init__(self, parent=None):
 		super(DoodleFrame, self).__init__(parent, title="Doodle Frame", 
-			size=wx.GetDisplaySize(), 
+			size= wx.GetDisplaySize(), 
 			style=wx.DEFAULT_FRAME_STYLE|wx.NO_FULL_REPAINT_ON_RESIZE)
 		doodle = DoodleWindow(self)
 
