@@ -101,7 +101,7 @@ class DoodleWindow(wx.Window):
 		dc.SetBackground(wx.Brush(self.GetBackgroundColour()))
 		dc.Clear()
 		width, height = self.GetClientSize()
-		if 1: #set background
+		if 0: #set background
 			font = wx.SystemSettings.GetFont(wx.SYS_DEFAULT_GUI_FONT)
 			font.MakeSmaller()
 			dc.SetFont(font)

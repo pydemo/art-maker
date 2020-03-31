@@ -35,7 +35,7 @@ class DoodleFrame(wx.Frame):
 	their layout with a wx.BoxSizer.  A menu and associated event handlers
 	provides for saving a doodle to a file, etc.
 	"""
-	title = "Do a doodle"
+	title = "Art Maker"
 	def __init__(self, parent):
 		wx.Frame.__init__(self, parent, -1, self.title, size=(800,600),
 						 style=wx.DEFAULT_FRAME_STYLE | wx.NO_FULL_REPAINT_ON_RESIZE)
