@@ -4,7 +4,7 @@ Scribble, doodle, draw, create art using wxPython
 
 
 ## Screenshots
-![ArtMaker](https://github.com/pydemo/art-maker/blob/master/screenshots/screenshot2.JPG?raw=true "ArtMaker")
+![ArtMaker](https://github.com/pydemo/art-maker/blob/master/screenshots/screenshot3.JPG?raw=true "ArtMaker")
 
 ![ArtMaker](https://github.com/pydemo/art-maker/blob/master/screenshots/screenshot.JPG?raw=true "ArtMaker")
 
