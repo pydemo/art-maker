@@ -105,7 +105,6 @@ class DoodleWindow(wx.Window):
 		# When the window is destroyed, clean up resources.
 		self.Bind(wx.EVT_WINDOW_DESTROY, self.Cleanup)
 		self.curLine = []
-		self.drawn =False
 
 
 	def Cleanup(self, evt):
@@ -174,7 +173,7 @@ class DoodleWindow(wx.Window):
 
 	def OnLeftDown(self, event):
 		"""called when the left mouse button is pressed"""
-		
+		self.curLine = []
 		self.pos = event.GetPosition()
 		self.CaptureMouse()
 
@@ -182,23 +181,9 @@ class DoodleWindow(wx.Window):
 	def OnLeftUp(self, event):
 		"""called when the left mouse button is released"""
 		if self.HasCapture():
-			#self.lines.append( (self.colour, self.thickness, self.curLine) )
-			self.lines=[] #[[self.colour, self.thickness, [self.curLine[0]]]]
-			#self.curLine = []
+			self.lines.append( (self.colour, self.thickness, self.curLine) )
+			self.curLine = []
 			self.ReleaseMouse()
-			if 1:
-				dc = wx.BufferedDC(wx.ClientDC(self), self.buffer)
-				if 1:
-					pen = wx.Pen(self.colour, self.thickness, wx.SOLID)
-					#pp(dir(pen))
-					dc.SetPen(pen)
-				#dc = wx.GCDC(dc)
-				coords=self.curLine[-1]
-				self.lines.append( (self.colour, self.thickness, [coords]) )
-				self.drawCoords(dc, coords, pen)
-				self.curLine = []
-				self.drawn=True
-			
 
 
 	def OnRightUp(self, event):
@@ -215,20 +200,18 @@ class DoodleWindow(wx.Window):
 		current one.  Save the coordinants for redraws.
 		"""
 		if event.Dragging() and event.LeftIsDown():
-			#dc = wx.BufferedDC(wx.ClientDC(self), self.buffer)
+			dc = wx.BufferedDC(wx.ClientDC(self), self.buffer)
 			
 			#dc.SetPen(self.pen)
 			pos = event.GetPosition()
 			coords = (self.pos.x, self.pos.y, pos.x, pos.y)
 			self.curLine.append(coords)
-			#print(coords)
-			if 0:
-				if 1:
-					pen = wx.Pen(self.colour, self.thickness, wx.SOLID)
-					#pp(dir(pen))
-					dc.SetPen(pen)
-				#dc = wx.GCDC(dc)
-				self.drawCoords(dc, coords, pen)
+			if 1:
+				pen = wx.Pen(self.colour, self.thickness, wx.SOLID)
+				#pp(dir(pen))
+				dc.SetPen(pen)
+			#dc = wx.GCDC(dc)
+			self.drawCoords(dc, coords, pen)
 			self.pos = pos
 			
 
@@ -269,7 +252,7 @@ class DoodleWindow(wx.Window):
 		Redraws all the lines that have been drawn already.
 		"""
 		#dc = wx.GCDC(dc)
-		for colour, thickness, line in self.lines[:1]:
+		for colour, thickness, line in self.lines:
 			pen = wx.Pen(colour, thickness, wx.SOLID)
 			#pp(dir(pen))
 			dc.SetPen(pen)
@@ -305,12 +288,12 @@ class DoodleWindow(wx.Window):
 				#font =wx.Font(60, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_BOLD, 0, "")
 				#dc.SetForegroundColour(wx.NamedColour("YELLOW"))
 				l=next(pool)
-				if 0:
+				if 1:
 					if l in ['S','H']:
 						s=next(size)
 					else:
 						s=next(ssize)
-				s=next(size)
+				#s=next(size)
 				font = wx.Font(s, wx.SWISS, wx.NORMAL, wx.BOLD, False)
 				#font.MakeSmaller()
 				gc = wx.GraphicsContext.Create(dc)
@@ -323,10 +306,7 @@ class DoodleWindow(wx.Window):
 				#gc.SetBrush(brush)
 				
 				#print(l)
-				txt= 'STAY HOME'
-				step=120
-				for z in range(10):
-					gc.DrawText(txt, x, y+z*step)
+				gc.DrawText(l, x, y)
 			
 
 
@@ -354,7 +334,6 @@ thicknesses = [6,  12, 24,12, 24,12, 24,12, 24,12, 24,12, 24, 48, 60]
 tlarge = [180,  270 ,  390]
 tsmall = [60, 90, 120, 180,210, 240] 
 thicknesses = tsmall+tlarge
-thicknesses = [100]
 
 join =[wx.JOIN_BEVEL, wx.JOIN_ROUND, wx.JOIN_MITER]
 
