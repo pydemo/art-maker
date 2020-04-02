@@ -5,13 +5,6 @@ from wx.lib import buttons # for generic button classes
 
 
 class ControlPanel(wx.Panel):
-	"""
-	This class implements a very simple control panel for the DoodleWindow.
-	It creates buttons for each of the colours and thickneses supported by
-	the DoodleWindow, and event handlers to set the selected values.  There is
-	also a little window that shows an example doodleLine in the selected
-	values.  Nested sizers are used for layout.
-	"""
 
 	BMP_SIZE = 16
 	BMP_BORDER = 2
@@ -25,9 +18,6 @@ class ControlPanel(wx.Panel):
 		btnSize = wx.Size(self.BMP_SIZE + 2*self.BMP_BORDER,
 						  self.BMP_SIZE + 2*self.BMP_BORDER)
 
-		# Make a grid of buttons for each colour.  Attach each button
-		# event to self.OnSetColour.  The button ID is the same as the
-		# key in the colour dictionary.
 		self.clrBtns = {}
 		colours = doodle.menuColours
 		keys = list(colours.keys())
@@ -41,12 +31,9 @@ class ControlPanel(wx.Panel):
 			self.Bind(wx.EVT_BUTTON, self.OnSetColour, b)
 			cGrid.Add(b, 0)
 			self.clrBtns[colours[k]] = b
+		
 		self.clrBtns[colours[keys[0]]].SetToggle(True)
 
-
-		# Make a grid of buttons for the thicknesses.  Attach each button
-		# event to self.OnSetThickness.  The button ID is the same as the
-		# thickness value.
 		self.thknsBtns = {}
 		tGrid = wx.GridSizer(cols=numCols, hgap=2, vgap=2)
 		for x in range(1, doodle.maxThickness+1):
@@ -56,18 +43,15 @@ class ControlPanel(wx.Panel):
 			self.Bind(wx.EVT_BUTTON, self.OnSetThickness, b)
 			tGrid.Add(b, 0)
 			self.thknsBtns[x] = b
+			
 		self.thknsBtns[1].SetToggle(True)
 
-		# Make a colour indicator window, it is registerd as a listener
-		# with the doodle window so it will be notified when the settings
-		# change
+
 		ci = ColourIndicator(self)
 		doodle.AddListener(ci)
 		doodle.Notify()
 		self.doodle = doodle
 
-		# Make a box sizer and put the two grids and the indicator
-		# window in it.
 		box = wx.BoxSizer(wx.VERTICAL)
 		box.Add(cGrid, 0, wx.ALL, spacing)
 		box.Add(tGrid, 0, wx.ALL, spacing)
@@ -106,6 +90,9 @@ class ControlPanel(wx.Panel):
 			self.clrBtns[self.doodle.colour].SetToggle(False)
 		# set the new colour
 		self.doodle.SetColour(colour)
+
+
+		
 
 
 	def OnSetThickness(self, event):

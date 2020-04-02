@@ -26,6 +26,7 @@ if 1:
 	colours = colours+['#c000a4', '#5c015e', '#5225d8', '#2a0161', '#0106d1', '#06004b'] #Royal
 	colours = colours+['#2060ff', '#209fff', '#20bfff', '#00cfff', '#2affff', '#55ffff', '#7fffff', '#aaffff', '#ffff54', '#fff000', '#ffbf00', '#ffa800',\
 	'#ff8a00', '#ff7000', '#ff4d00', '#ff0000']
+	colours = ['#EFE3CE', '#E4D7B9', '#DE9297', '#DEA5A4', '#DEB2A8', '#E2C1B8','#ffd1dc', '#000000']
 	#colours = colours+['#f4e1f0', '#f98a6b', '#d31b36', '#123e49', '#71999b', '#f9f7fc', '#fed760', '#fc648d', '#621a32', '#778cdf'] #drip
 	#colours = colours+['#c89e12', '#fdc100', '#ff8c00', '#fc3c07', '#b81313', '#6b2e13', '#472c00'] #fruit
 	#colours = colours+['#ea573d', '#fbc063', '#64b0bc', '#446699', '#555577'] #blue lagoon
@@ -398,7 +399,7 @@ class DoodleWindow(wx.Window,DoodleMenus):
 		#wx.SOLID+wx.CAP_PROJECTING
 		cap = wx.CAP_BUTT
 		caps=[wx.CAP_ROUND , wx.CAP_PROJECTING] #, wx.CAP_BUTT]
-		caps=[wx.CAP_ROUND]
+		caps=[wx.CAP_BUTT]
 		brush= wx.SHORT_DASH
 		for colour, thickness, lineSegments in lines:
 			pen = wx.Pen(wx.Colour(colour), thickness, brush)

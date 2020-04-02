@@ -2,7 +2,7 @@
 import wx    
 import wx.html
 
-import sys
+import os, sys
 
 from include.DoodleWindow import DoodleWindow
 
