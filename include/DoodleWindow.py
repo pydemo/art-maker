@@ -106,6 +106,7 @@ class DoodleWindow(wx.Window):
 		self.Bind(wx.EVT_WINDOW_DESTROY, self.Cleanup)
 		self.curLine = []
 		self.drawn =False
+		self.font='Script'
 
 
 	def Cleanup(self, evt):
@@ -277,8 +278,8 @@ class DoodleWindow(wx.Window):
 			
 			for coords in line:
 				self.drawCoords(dc, coords, pen)
-	@staticmethod
-	def drawCoords(dc, coords, pen):
+	#@staticmethod
+	def drawCoords(self,dc, coords, pen):
 		brush= wx.SHORT_DASH
 		size=get_size(thicknesses)
 		lsize=get_size(tlarge)
@@ -311,10 +312,25 @@ class DoodleWindow(wx.Window):
 					else:
 						s=next(ssize)
 				s=next(size)
-				font = wx.Font(s, wx.SWISS, wx.NORMAL, wx.BOLD, False)
+				print(self.font)
+				font = wx.Font(s, wx.DEFAULT     , wx.NORMAL , wx.BOLD, False, 'Bahnschrift SemiCondensed')
 				#font.MakeSmaller()
-				gc = wx.GraphicsContext.Create(dc)
-				gc.SetFont(font, next(clr))
+				if 1:
+					gc = wx.GraphicsContext.Create(dc)
+					gc.SetFont(font, next(clr))
+					txt= 'STAYHOMESTAYHOME'
+					step=120
+					for z in range(10):
+						for lid, letter in enumerate(txt):
+							gc.SetFont(font, next(clr))
+							gc.DrawText(letter, x + lid*50, y+z*step)	
+					
+				else:
+					dc.SetFont(font)
+					txt= 'STAY HOME'
+					step=120
+					for z in range(10):
+						dc.DrawText(txt, x, y+z*step)					
 				#w, labelHeight = dc.GetTextExtent('Wy')
 				#bmp = images.Smiles.GetBitmap()
 				#bmp.SetMask(None)
@@ -323,10 +339,7 @@ class DoodleWindow(wx.Window):
 				#gc.SetBrush(brush)
 				
 				#print(l)
-				txt= 'STAY HOME'
-				step=120
-				for z in range(10):
-					gc.DrawText(txt, x, y+z*step)
+
 			
 
 
@@ -342,6 +355,8 @@ class DoodleWindow(wx.Window):
 	def setColours(self, clrs):
 		global colours
 		colours = clrs
+	def setFont(self,font):
+		self.font=font
 if 1:
 	from itertools import cycle
 
@@ -361,18 +376,18 @@ join =[wx.JOIN_BEVEL, wx.JOIN_ROUND, wx.JOIN_MITER]
 caps=[wx.CAP_ROUND , wx.CAP_PROJECTING] #, wx.CAP_BUTT]
 caps=[wx.CAP_ROUND]
 clrs = []
-colours =  ['#e7ebee','#6c7197','#739211','#080300','#d92405','#3563eb','#eac124'] #BIRD
+#colours =  ['#e7ebee','#6c7197','#739211','#080300','#d92405','#3563eb','#eac124'] #BIRD
 #colours =  colours+['#60bdaf', '#a1d8b1', '#edfcc2', '#f88aaf', '#455655'] #Michael Cina
-colours =  colours+['#d7dddb', '#4f8a83', '#e76278', '#fac699', '#712164'] #Baloons
-colours = colours+ ['#585340', '#b7ae9d', '#fafffc', '#accecd', '#8a151b', '#bc6367'] #Ryde
+#colours =  colours+['#d7dddb', '#4f8a83', '#e76278', '#fac699', '#712164'] #Baloons
+#colours = colours+ ['#585340', '#b7ae9d', '#fafffc', '#accecd', '#8a151b', '#bc6367'] #Ryde
 #colours = colours+['#51574a', '#447c69', '#74c493', '#8e8c6d', '#e4bf80', '#e9d78e', '#e2975d', '#f19670', '#e16552', '#c94a53', '#be5168', '#a34974',\
 #'#993767', '#65387d', '#4e2472', '#9163b6', '#e279a3', '#e0598b', '#7c9fb0', '#5698c4', '#9abf88'] #trove
-colours = colours+['#f7fcf0', '#e0f3db', '#ccebc5', '#a8ddb5', '#7bccc4', '#4eb3d3', '#2b8cbe', '#0868ac', '#084081'] #Toni
-colours = colours+['#1a1334', '#26294a', '#01545a', '#017351', '#03c383', '#aad962', '#fbbf45', '#ef6a32', '#ed0345', '#a12a5e', '#710162', '#110141'] #Colores
-colours = colours+['#fc6472', '#f4b2a6', '#eccdb3', '#bcefd0', '#a1e8e4', '#23c8b2', '#c3ecee'] #Pleasant
-colours = colours+['#faa818', '#41a30d', '#ffce38', '#367d7d', '#d33502', '#6ebcbc', '#37526d'] #Van Gogh
-colours = colours+['#c000a4', '#5c015e', '#5225d8', '#2a0161', '#0106d1', '#06004b'] #Royal
-colours = colours+['#2060ff', '#209fff', '#20bfff', '#00cfff', '#2affff', '#55ffff', '#7fffff', '#aaffff', '#ffff54', '#fff000', '#ffbf00', '#ffa800',\
+#colours = colours+['#f7fcf0', '#e0f3db', '#ccebc5', '#a8ddb5', '#7bccc4', '#4eb3d3', '#2b8cbe', '#0868ac', '#084081'] #Toni
+#colours = colours+['#1a1334', '#26294a', '#01545a', '#017351', '#03c383', '#aad962', '#fbbf45', '#ef6a32', '#ed0345', '#a12a5e', '#710162', '#110141'] #Colores
+#colours = colours+['#fc6472', '#f4b2a6', '#eccdb3', '#bcefd0', '#a1e8e4', '#23c8b2', '#c3ecee'] #Pleasant
+#colours = colours+['#faa818', '#41a30d', '#ffce38', '#367d7d', '#d33502', '#6ebcbc', '#37526d'] #Van Gogh
+#colours = colours+['#c000a4', '#5c015e', '#5225d8', '#2a0161', '#0106d1', '#06004b'] #Royal
+colours = ['#2060ff', '#209fff', '#20bfff', '#00cfff', '#2affff', '#55ffff', '#7fffff', '#aaffff', '#ffff54', '#fff000', '#ffbf00', '#ffa800',\
 '#ff8a00', '#ff7000', '#ff4d00', '#ff0000']
 clrs.append(colours)
 if 0:

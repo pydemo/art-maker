@@ -56,12 +56,28 @@ class ControlPanel(wx.Panel):
 		box.Add(cGrid, 0, wx.ALL, spacing)
 		box.Add(tGrid, 0, wx.ALL, spacing)
 		box.Add(ci, 0, wx.EXPAND|wx.ALL, spacing)
+		
+		if 1:
+			e = wx.FontEnumerator()
+			e.EnumerateFacenames()
+			elist= e.GetFacenames()
+			self.lb1 = wx.ListBox(self, -1, wx.DefaultPosition, (200, -1),
+							 elist, wx.LB_SINGLE)
+			self.Bind(wx.EVT_LISTBOX, self.OnSelect, id=self.lb1.GetId())
+			box.Add(self.lb1, 0, wx.EXPAND|wx.ALL)
+		
 		self.SetSizer(box)
 		self.SetAutoLayout(True)
 
 		# Resize this window so it is just large enough for the
 		# minimum requirements of the sizer.
 		box.Fit(self)
+		
+	def OnSelect(self, evt):
+		face = self.lb1.GetStringSelection()
+		print(face)
+		self.doodle.setFont(face)
+		
 
 
 
