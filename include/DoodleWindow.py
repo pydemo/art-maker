@@ -376,7 +376,7 @@ join =[wx.JOIN_BEVEL, wx.JOIN_ROUND, wx.JOIN_MITER]
 caps=[wx.CAP_ROUND , wx.CAP_PROJECTING] #, wx.CAP_BUTT]
 caps=[wx.CAP_ROUND]
 clrs = []
-#colours =  ['#e7ebee','#6c7197','#739211','#080300','#d92405','#3563eb','#eac124'] #BIRD
+colours =  ['#e7ebee','#6c7197','#739211','#080300','#d92405','#3563eb','#eac124'] #BIRD
 #colours =  colours+['#60bdaf', '#a1d8b1', '#edfcc2', '#f88aaf', '#455655'] #Michael Cina
 #colours =  colours+['#d7dddb', '#4f8a83', '#e76278', '#fac699', '#712164'] #Baloons
 #colours = colours+ ['#585340', '#b7ae9d', '#fafffc', '#accecd', '#8a151b', '#bc6367'] #Ryde
@@ -387,8 +387,8 @@ clrs = []
 #colours = colours+['#fc6472', '#f4b2a6', '#eccdb3', '#bcefd0', '#a1e8e4', '#23c8b2', '#c3ecee'] #Pleasant
 #colours = colours+['#faa818', '#41a30d', '#ffce38', '#367d7d', '#d33502', '#6ebcbc', '#37526d'] #Van Gogh
 #colours = colours+['#c000a4', '#5c015e', '#5225d8', '#2a0161', '#0106d1', '#06004b'] #Royal
-colours = ['#2060ff', '#209fff', '#20bfff', '#00cfff', '#2affff', '#55ffff', '#7fffff', '#aaffff', '#ffff54', '#fff000', '#ffbf00', '#ffa800',\
-'#ff8a00', '#ff7000', '#ff4d00', '#ff0000']
+#colours = colours+['#2060ff', '#209fff', '#20bfff', '#00cfff', '#2affff', '#55ffff', '#7fffff', '#aaffff', '#ffff54', '#fff000', '#ffbf00', '#ffa800',\
+#'#ff8a00', '#ff7000', '#ff4d00', '#ff0000']
 clrs.append(colours)
 if 0:
 	colours =  ['#e7ebee','#6c7197','#739211','#080300','#d92405','#3563eb','#eac124'] #BIRD
