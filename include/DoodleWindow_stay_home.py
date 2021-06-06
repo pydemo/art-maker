@@ -289,7 +289,7 @@ class DoodleWindow(wx.Window):
 				#dc.SetForegroundColour(wx.NamedColour("YELLOW"))
 				l=next(pool)
 				if 1:
-					if l in ['S','H']:
+					if l in ['F','N']:
 						s=next(size)
 					else:
 						s=next(ssize)
@@ -325,7 +325,7 @@ class DoodleWindow(wx.Window):
 if 1:
 	from itertools import cycle
 
-	lst = [x.upper() for x in 'S      t      a      y            H      o      m      e ']
+	lst = [x.upper() for x in 'F      r      e        N      a      v      a      l    n   y ']
 	#lst = [x for x in 'S      t      a      y                        H      o      m      e ']
 	#lst = 'STAY HOME'
 

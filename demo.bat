@@ -1,0 +1,1 @@
+python C:\tmp\Python\Python38-32\demo\demo.py

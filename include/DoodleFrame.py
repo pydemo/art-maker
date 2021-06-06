@@ -4,7 +4,7 @@ import wx.html
 
 import os, sys
 
-from include.DoodleWindow import DoodleWindow
+from include.DoodleWindow_stay_home import DoodleWindow
 
 from include.DoodleAbout import DoodleAbout
 
